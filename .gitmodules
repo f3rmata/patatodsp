@@ -1,0 +1,3 @@
+[submodule "doc/ADSD/Code"]
+	path = doc/ADSD/Code
+	url = https://github.com/ADSD-SoC-FPGA/Code.git
