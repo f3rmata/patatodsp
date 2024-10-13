@@ -1,0 +1,1 @@
+addpath('../doc/ADSD/Code/examples/simulink-common/')

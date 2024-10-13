@@ -1,0 +1,17 @@
+[General]
+ipc_version=4
+file=fp_mult
+module=FP_Mult_Top
+target_device=gw5a25b-007
+type=fp_mult
+version=1.0
+
+[Config]
+ClkEnable=false
+DisableIO=true
+LANG=0
+Nan=true
+Overflow=true
+Synthesis_tool=GowinSynthesis
+Underflow=true
+Zero=true

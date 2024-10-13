@@ -1,0 +1,42 @@
+GowinSynthesis start
+Running parser ...
+Analyzing Verilog file '/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult.v'
+Analyzing included file 'define.vh'("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult.v":284)
+Back to file '/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult.v'("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult.v":284)
+Analyzing included file '/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/static_macro_define.v'("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult.v":284)
+Back to file '/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult.v'("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult.v":284)
+Analyzing Verilog file '/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult_wrap.v'
+Analyzing included file 'define.vh'("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult_wrap.v":1)
+Back to file '/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult_wrap.v'("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult_wrap.v":1)
+Analyzing included file '/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/static_macro_define.v'("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult_wrap.v":2)
+Back to file '/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult_wrap.v'("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult_wrap.v":2)
+Compiling module 'FP_Mult_Top'("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult_wrap.v":6)
+Compiling module '**'("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult.v":284)
+WARN  (EX3791) : Expression size ** truncated to fit in target size **("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult.v":284)
+NOTE  (EX0101) : Current top module is "FP_Mult_Top"
+[5%] Running netlist conversion ...
+Running device independent optimization ...
+[10%] Optimizing Phase 0 completed
+[15%] Optimizing Phase 1 completed
+[25%] Optimizing Phase 2 completed
+Running inference ...
+[30%] Inferring Phase 0 completed
+[40%] Inferring Phase 1 completed
+[50%] Inferring Phase 2 completed
+[55%] Inferring Phase 3 completed
+Running technical mapping ...
+[60%] Tech-Mapping Phase 0 completed
+[65%] Tech-Mapping Phase 1 completed
+[75%] Tech-Mapping Phase 2 completed
+[80%] Tech-Mapping Phase 3 completed
+[90%] Tech-Mapping Phase 4 completed
+WARN  (NL0002) : The module "(PENC8)/(FP_Mult_Top)" instantiated to "P0" is swept in optimizing("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult.v":284)
+WARN  (NL0002) : The module "(PENC8)/(FP_Mult_Top)" instantiated to "P1" is swept in optimizing("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult.v":284)
+WARN  (NL0002) : The module "(PENC8)/(FP_Mult_Top)" instantiated to "P3" is swept in optimizing("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult.v":284)
+WARN  (NL0002) : The module "(PENC8)/(FP_Mult_Top)" instantiated to "P0" is swept in optimizing("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult.v":284)
+WARN  (NL0002) : The module "(PENC8)/(FP_Mult_Top)" instantiated to "P1" is swept in optimizing("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult.v":284)
+WARN  (NL0002) : The module "(PENC8)/(FP_Mult_Top)" instantiated to "P3" is swept in optimizing("/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/FPMULT/data/FP_Mult.v":284)
+[95%] Generate netlist file "/home/fermata/Development/FPGA/patatodsp/hdlsrc/gowin_prj/patatodsp/src/fp_mult/temp/FPADDSUB/fp_mult.vg" completed
+Generate template file "/home/fermata/Development/FPGA/patatodsp/hdlsrc/gowin_prj/patatodsp/src/fp_mult/temp/FPADDSUB/fp_mult_tmp.v" completed
+[100%] Generate report file "/home/fermata/Development/FPGA/patatodsp/hdlsrc/gowin_prj/patatodsp/src/fp_mult/temp/FPADDSUB/fp_mult_syn.rpt.html" completed
+GowinSynthesis finish

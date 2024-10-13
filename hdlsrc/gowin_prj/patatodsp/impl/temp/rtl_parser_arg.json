@@ -1,0 +1,29 @@
+{
+ "Device" : "GW5A-25B",
+ "Files" : [
+  {
+   "Path" : "/home/fermata/Development/FPGA/patatodsp/hdlsrc/gowin_prj/patatodsp/src/comb_filter.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/fermata/Development/FPGA/patatodsp/hdlsrc/gowin_prj/patatodsp/src/gowin_sdpb/gowin_sdpb.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/fermata/Development/FPGA/patatodsp/hdlsrc/gowin_prj/patatodsp/src/gowin_mult/gowin_mult.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/fermata/Development/FPGA/patatodsp/hdlsrc/gowin_prj/patatodsp/src/fp_mult/fp_mult.v",
+   "Type" : "verilog"
+  }
+ ],
+ "IncludePath" : [
+
+ ],
+ "LoopLimit" : 2000,
+ "ResultFile" : "/home/fermata/Development/FPGA/patatodsp/hdlsrc/gowin_prj/patatodsp/impl/temp/rtl_parser.result",
+ "Top" : "",
+ "VerilogStd" : "verilog_2001",
+ "VhdlStd" : "vhdl_93"
+}
