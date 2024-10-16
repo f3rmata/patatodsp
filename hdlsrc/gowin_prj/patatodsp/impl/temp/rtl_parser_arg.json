@@ -6,7 +6,7 @@
    "Type" : "verilog"
   },
   {
-   "Path" : "/home/fermata/Development/FPGA/patatodsp/hdlsrc/gowin_prj/patatodsp/src/gowin_sdpb/gowin_sdpb.v",
+   "Path" : "/home/fermata/Development/FPGA/patatodsp/hdlsrc/gowin_prj/patatodsp/src/fp_mult/fp_mult.v",
    "Type" : "verilog"
   },
   {
@@ -14,7 +14,7 @@
    "Type" : "verilog"
   },
   {
-   "Path" : "/home/fermata/Development/FPGA/patatodsp/hdlsrc/gowin_prj/patatodsp/src/fp_mult/fp_mult.v",
+   "Path" : "/home/fermata/Development/FPGA/patatodsp/hdlsrc/gowin_prj/patatodsp/src/gowin_sdpb/gowin_sdpb.v",
    "Type" : "verilog"
   }
  ],
