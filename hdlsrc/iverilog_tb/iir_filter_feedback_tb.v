@@ -22,6 +22,9 @@ module iir_filter_feedback_tb ();
 
     always #10 begin 
 	clk = ~clk;
+    end
+
+    always #20 begin
 	audio_in = sin[addr];
 	if (addr == 2047) addr = 0;
 	else addr = addr + 1'b1;

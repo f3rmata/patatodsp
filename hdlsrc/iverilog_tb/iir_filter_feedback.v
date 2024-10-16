@@ -7,20 +7,20 @@ module iir_filter_feedback
         input wire clk,
         input wire rst_n,
 
-        output wire [15:0] audio_out
+        output wire [31:0] audio_out
     );
 
-    reg [15:0] audio_s1 = 0;
-    reg [15:0] audio_s2 = 0;
-    reg [15:0] audio_s3 = 0;
-    reg [15:0] audio_s4 = 0;
-    reg [15:0] audio_s5 = 0;
+    reg [31:0] audio_s1 = 0;
+    reg [31:0] audio_s2 = 0;
+    reg [31:0] audio_s3 = 0;
+    reg [31:0] audio_s4 = 0;
+    reg [31:0] audio_s5 = 0;
 
-    wire [15:0] audio_delayed_s1;
-    wire [15:0] audio_delayed_s2;
-    wire [15:0] audio_delayed_s3;
-    wire [15:0] audio_delayed_s4;
-    wire [15:0] audio_delayed_s5;
+    wire [31:0] audio_delayed_s1;
+    wire [31:0] audio_delayed_s2;
+    wire [31:0] audio_delayed_s3;
+    wire [31:0] audio_delayed_s4;
+    wire [31:0] audio_delayed_s5;
 
     reg wr_en = 1;
     reg rd_en = 1;
@@ -38,9 +38,9 @@ module iir_filter_feedback
             audio_s1 <= 0;
         end else begin
             if (rd_valid_s1)
-                audio_s1 <= audio_in + audio_delayed_s1 / 2;
+                audio_s1 <= {16'b0,audio_in} + audio_delayed_s1 / 4;
             else begin
-                audio_s1 <= audio_in;
+                audio_s1 <= {16'b0,audio_in};
             end
         end
     end
@@ -50,9 +50,9 @@ module iir_filter_feedback
             audio_s2 <= 0;
         end else begin
             if (rd_valid_s2)
-                audio_s2 <= audio_in + audio_delayed_s2 / 4;
+                audio_s2 <= {16'b0,audio_in} + audio_delayed_s2 / 16;
             else begin
-                audio_s2 <= audio_in;
+                audio_s2 <= {16'b0,audio_in};
             end
         end
     end
@@ -62,9 +62,9 @@ module iir_filter_feedback
             audio_s3 <= 0;
         end else begin
             if (rd_valid_s3)
-                audio_s3 <= audio_in + audio_delayed_s3 / 2;
+                audio_s3 <= {16'b0,audio_in} + audio_delayed_s3 / 32;
             else begin
-                audio_s3 <= audio_in;
+                audio_s3 <= {16'b0,audio_in};
             end
         end
     end
@@ -73,10 +73,10 @@ module iir_filter_feedback
 
     circular_buffer
         #(
-        .WRITE_DATA_WIDTH(16),
+        .WRITE_DATA_WIDTH(32),
         .WRITE_DATA_DEPTH(4096),
 
-        .READ_DATA_WIDTH(16),
+        .READ_DATA_WIDTH(32),
         .READ_DATA_DEPTH(4096),
 
         .DELAY(50)
@@ -92,10 +92,10 @@ module iir_filter_feedback
 
     circular_buffer
         #(
-        .WRITE_DATA_WIDTH(16),
+        .WRITE_DATA_WIDTH(32),
         .WRITE_DATA_DEPTH(4096),
 
-        .READ_DATA_WIDTH(16),
+        .READ_DATA_WIDTH(32),
         .READ_DATA_DEPTH(4096),
 
         .DELAY(100)
@@ -111,10 +111,10 @@ module iir_filter_feedback
 
     circular_buffer
         #(
-        .WRITE_DATA_WIDTH(16),
+        .WRITE_DATA_WIDTH(32),
         .WRITE_DATA_DEPTH(4096),
 
-        .READ_DATA_WIDTH(16),
+        .READ_DATA_WIDTH(32),
         .READ_DATA_DEPTH(4096),
 
         .DELAY(150)

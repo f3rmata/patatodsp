@@ -23,6 +23,11 @@ module circular_buffer
 
     // simple dualport ram.
     reg [WRITE_DATA_WIDTH-1:0] ram [WRITE_DATA_DEPTH-1:0];
+    integer i;
+    initial begin
+	for (i = 0; i <= WRITE_DATA_DEPTH; i = i + 1)
+	    ram[i] = 0;
+    end
 
     always @(posedge clk or negedge rst_n) begin
 	if ( !rst_n ) begin
@@ -52,12 +57,17 @@ module circular_buffer
 	if ( !rst_n ) begin
 	    wr_addr <= 0;
 	    rd_addr <= 0;
-	end else begin 
+	end else begin
 	    if ( wr_addr == READ_DATA_DEPTH - 1 ) wr_addr = 0;
 	    else wr_addr <= wr_addr + 1'b1;
+	    // reset addr when full.
+
 	    rd_addr <= wr_addr - DELAY;
-	    if ( rd_addr < wr_addr ) rd_valid <= 1'b1;
-	    else rd_valid <= 0;
+	    if ( rd_addr <= wr_addr ) begin 
+		rd_valid <= 1'b1;
+	    end else begin 
+		rd_valid <= 0;
+	    end
 	end
     end
 
