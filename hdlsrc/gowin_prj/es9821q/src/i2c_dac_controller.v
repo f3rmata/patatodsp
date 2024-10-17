@@ -22,7 +22,6 @@ module i2c_dac_control (
     reg [7:0] i2c_data;           // 通过 I2C 发送的数据
     reg [3:0] bit_counter;        // 位计数器，用于跟踪正在传输的位数
 
-
     // 时钟分频
     reg [15:0] clk_div;
     always @(posedge clk or negedge rst_n) begin

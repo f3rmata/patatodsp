@@ -1,0 +1,20 @@
+<?xml version="1" encoding="UTF-8"?>
+<!DOCTYPE gowin-fpga-project>
+<Project>
+    <Template>FPGA</Template>
+    <Version>5</Version>
+    <Device name="GW5A-25B" pn="GW5A-LV25UG324C2/I1">gw5a25b-007</Device>
+    <FileList>
+        <File path="src/audio_fifo.v" type="file.verilog" enable="1"/>
+        <File path="src/es9821q_controller.v" type="file.verilog" enable="1"/>
+        <File path="src/es9821q_tb.v" type="file.verilog" enable="1"/>
+        <File path="src/fifo_top/fifo_top.v" type="file.verilog" enable="1"/>
+        <File path="src/i2c_adc_controller.v" type="file.verilog" enable="1"/>
+        <File path="src/i2c_dac_controller.v" type="file.verilog" enable="1"/>
+        <File path="src/i2s_adc_controller.v" type="file.verilog" enable="1"/>
+        <File path="src/i2s_dac_control.v" type="file.verilog" enable="1"/>
+        <File path="src/es9821q.cst" type="file.cst" enable="1"/>
+        <File path="src/es9821.sdc" type="file.sdc" enable="1"/>
+        <File path="src/es9821q.gao" type="file.gao" enable="1"/>
+    </FileList>
+</Project>

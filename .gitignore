@@ -1,2 +1,6 @@
 python/.ipynb_checkpoints/*
 python/venv
+hdlsrc/gowin_prj/es9821q/impl
+hdlsrc/gowin_prj/es9821q/sim
+hdlsrc/gowin_prj/patatodsp/impl
+hdlsrc/gowin_prj/patatodsp/sim

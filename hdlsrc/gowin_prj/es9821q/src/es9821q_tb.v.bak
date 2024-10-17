@@ -1,0 +1,94 @@
+`timescale 1ns / 1ps
+
+module tb_es9821q;
+
+    // Parameters
+    parameter SYS_CLK_FREQ = 50_000_000;  // System Clock Frequency
+    parameter I2C_FREQ = 250_000;          // I2C Clock Frequency
+
+    // Testbench Signals
+    reg sys_clk;
+    reg sys_rst_n;
+    reg i2c_rw;
+    reg i2c_start;
+    reg i2c_num;
+    reg [31:0] i2c_addr;
+    reg [7:0] i2c_data_w;
+    wire i2c_clk;
+    wire i2c_end;
+    wire [31:0] i2c_data_r;
+    wire scl;
+    wire sda;
+
+    // Instantiate the es9821q module
+    es9821q #(
+        .SYS_CLK_FREQ(SYS_CLK_FREQ),
+        .I2C_FREQ(I2C_FREQ)
+    ) uut (
+        .sys_clk(sys_clk),
+        .sys_rst_n(sys_rst_n),
+        .i2c_rw(i2c_rw),
+        .i2c_start(i2c_start),
+        .i2c_num(i2c_num),
+        .i2c_addr(i2c_addr),
+        .i2c_data_w(i2c_data_w),
+        .i2c_clk(i2c_clk),
+        .i2c_end(i2c_end),
+        .i2c_data_r(i2c_data_r),
+        .scl(scl),
+        .sda(sda)
+    );
+
+    // Clock Generation
+    initial begin
+        sys_clk = 0;
+        forever #10 sys_clk = ~sys_clk; // 50 MHz clock
+    end
+
+    // Test Sequence
+    initial begin
+        // Initialize Inputs
+        sys_rst_n = 0;
+        i2c_rw = 0;
+        i2c_start = 0;
+        i2c_num = 0;
+        i2c_addr = 32'h00000000; // Address
+        i2c_data_w = 8'h00;      // Write data
+
+        // Wait for reset
+        #20;
+        sys_rst_n = 1; // Release reset
+
+        // Start a Write operation
+        i2c_start = 1;
+        i2c_rw = 0;       // Write operation
+        i2c_num = 0;      // 8-bit address
+        i2c_addr = 32'hA0; // Example address
+        i2c_data_w = 8'hFF; // Example data
+        #20; // Wait for a while
+        i2c_start = 0; // Deactivate start signal
+
+        // Wait for write to complete
+        wait(i2c_end);
+        #20;
+
+        // Start a Read operation
+        i2c_start = 1;
+        i2c_rw = 1;       // Read operation
+        i2c_num = 0;      // 8-bit address
+        i2c_addr = 32'hA0; // Example address
+        #20; // Wait for a while
+        i2c_start = 0; // Deactivate start signal
+
+        // Wait for read to complete
+        wait(i2c_end);
+        #20;
+
+        // Check read data
+        $display("Read Data: %h", i2c_data_r);
+
+        // Finish simulation
+        $finish;
+    end
+
+endmodule
