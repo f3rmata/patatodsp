@@ -4,15 +4,8 @@
     <Mode>Lite</Mode>
     <AoCore_Lite index="0" sample_clock="clk" trig_type="0" capture_amount="1024" implemention="0" input_register_enabled="0" capture_init_data_enabled="0" module_name="es9821q_controller">
         <SignalList>
-            <Signal capture_enable="true">sda_adc</Signal>
-            <Signal capture_enable="true">scl_adc_d</Signal>
-            <Bus capture_enable="true" name="i2c_adc_inst/state[2:0]">
-                <Signal>i2c_adc_inst/state[2]</Signal>
-                <Signal>i2c_adc_inst/state[1]</Signal>
-                <Signal>i2c_adc_inst/state[0]</Signal>
-            </Bus>
             <Signal capture_enable="true">rst_n</Signal>
         </SignalList>
     </AoCore_Lite>
-    <GAO_ID>0100010000001011</GAO_ID>
+    <GAO_ID>0110100100100101</GAO_ID>
 </GAO_CONFIG>
