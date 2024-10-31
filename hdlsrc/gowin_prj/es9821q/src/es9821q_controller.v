@@ -62,7 +62,6 @@ module es9821q_controller (
         .reset(1'b1),             // 使用同步后的复位信号，低电平有效
         .start(start_signal_internal),     // 启动I2C传输的信号
         .addr(i2c_addr_adc),               // ADC的I2C地址
-        .data(i2c_data_adc),
         .scl(scl_adc),
         .sda(sda_adc),
         .busy(busy_adc),

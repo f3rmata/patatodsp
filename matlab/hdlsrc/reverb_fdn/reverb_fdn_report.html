@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope itemtype="https://www.mathworks.com/help/schema/MathWorksDocPage">
+<head>
+<title>HDL Check Report for 'reverb_fdn'</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<script type="text/javascript" src="file:///home/fermata/Development/Software/MATLAB/R2024a/toolbox/hdlcoder/hdlcommon/js_css/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="file:///home/fermata/Development/Software/MATLAB/R2024a/toolbox/hdlcoder/hdlcommon/js_css/docscripts.js"></script>
+        
+        <link href="file:///home/fermata/Development/Software/MATLAB/R2024a/toolbox/hdlcoder/hdlcommon/js_css/ice_960.css" rel="stylesheet" type="text/css">
+        <link href="file:///home/fermata/Development/Software/MATLAB/R2024a/toolbox/hdlcoder/hdlcommon/js_css/HDLsite5.css" rel="stylesheet" type="text/css">
+        <link href="file:///home/fermata/Development/Software/MATLAB/R2024a/toolbox/hdlcoder/hdlcommon/js_css/ice_doc_center.css" rel="stylesheet" type="text/css">
+        <link href="file:///home/fermata/Development/Software/MATLAB/R2024a/toolbox/hdlcoder/hdlcommon/js_css/ice_doc_center_installed.css" rel="stylesheet" type="text/css">
+        <link href="file:///home/fermata/Development/Software/MATLAB/R2024a/toolbox/hdlcoder/hdlcommon/js_css/ice_doc_center_print.css" rel="stylesheet" type="text/css" media="print">
+        <script type="text/javascript">
+            if (navigator.appName != "ICEbrowser") {
+            var cssStyleSheets = $("link").filter(function(){
+            var href = $(this).attr('href');
+            return href.indexOf("ice_doc_center_print.css") == -1});
+            var hrefElements = $.map(cssStyleSheets, function(elem) {
+            var href = $(elem).attr('href');
+            var hrefArray = href.split("/");
+            hrefArray[hrefArray.length - 1] = hrefArray[hrefArray.length - 1].replace("ice_", "");
+            return {
+            href: hrefArray.join("/"),
+            media: $(elem).attr('media')
+            };
+            });
+            cssStyleSheets.remove();
+            for (var i = 0; i < hrefElements.length; i++) {
+            if ($.browser.msie && $.browser.version <= 8) {
+            document.createStyleSheet(hrefElements[i].href);
+            } else {
+            var link = $('<link rel="stylesheet" href=' + hrefElements[i].href + ' type="text/css" />');
+            if (hrefElements[i].media) {
+            link.attr('media', hrefElements[i].media);
+            }
+            $('head').append(link);
+            }
+            }
+            }
+    </script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<div class="container_192">
+<div class="grid_192">
+ <div class="page_container"><div class="content_frame">
+<h1>HDL Code Generation Check Report for 'reverb_fdn'
+<a href="matlab:open_system('reverb_fdn');">open model 'reverb_fdn'</a><BR>
+Generated on 2024-10-30 21:57:49</h1>
+<H2>HDL check for 'reverb_fdn' complete with 11 errors, 2 warnings, and 0 messages.</H2><BR>
+<H3>The following table describes blocks for which errors, warnings or messages were reported.</H3><BR>
+<TABLE style="border: 2px solid; border-collapse: collapse;">
+<TR><TD style="border: 2px solid; border-collapse: collapse;"> <B>Simulink Blocks and resources</B> </TD><TD style="border: 2px solid; border-collapse: collapse;"> <B>Level</B> </TD><TD style="border: 2px solid; border-collapse: collapse;"> <B>Description</B> </TD></TR><TR><TD style="border: 2px solid; border-collapse: collapse;">
+<a alt="hdlcoder:engine:missingImplementation" href="matlab:hilite(get_param(char([114 101 118 101 114 98 95 102 100 110]),'object'),'none');hilite_system(char([114 101 118 101 114 98 95 102 100 110 47 65 117 100 105 111 32 68 101 118 105 99 101 10 87 114 105 116 101 114]))">reverb_fdn/Audio Device
+Writer</a>
+</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Error</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Block 'reverb_fdn/Audio Device Writer' is not supported for HDL code generation. To continue with code generation, comment out this block.</TD>
+</TR>
+<TR><TD style="border: 2px solid; border-collapse: collapse;">
+<a alt="hdlcoder:engine:missingImplementation" href="matlab:hilite(get_param(char([114 101 118 101 114 98 95 102 100 110]),'object'),'none');hilite_system(char([114 101 118 101 114 98 95 102 100 110 47 65 117 100 105 116 111 114 121 32 83 112 101 99 116 114 111 103 114 97 109 47 73 110 112 117 116 32 66 117 102 102 101 114]))">reverb_fdn/Auditory Spectrogram/Input Buffer</a>
+</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Error</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Block 'reverb_fdn/Auditory Spectrogram/Input Buffer' is not supported for HDL code generation. To continue with code generation, comment out this block.</TD>
+</TR>
+<TR><TD style="border: 2px solid; border-collapse: collapse;">
+<a alt="hdlcoder:engine:missingImplementation" href="matlab:hilite(get_param(char([114 101 118 101 114 98 95 102 100 110]),'object'),'none');hilite_system(char([114 101 118 101 114 98 95 102 100 110 47 65 117 100 105 116 111 114 121 32 83 112 101 99 116 114 111 103 114 97 109 47 79 117 116 112 117 116 32 66 117 102 102 101 114]))">reverb_fdn/Auditory Spectrogram/Output Buffer</a>
+</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Error</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Block 'reverb_fdn/Auditory Spectrogram/Output Buffer' is not supported for HDL code generation. To continue with code generation, comment out this block.</TD>
+</TR>
+<TR><TD style="border: 2px solid; border-collapse: collapse;">
+<a alt="hdlcoder:engine:missingImplementation" href="matlab:hilite(get_param(char([114 101 118 101 114 98 95 102 100 110]),'object'),'none');hilite_system(char([114 101 118 101 114 98 95 102 100 110 47 65 117 100 105 116 111 114 121 32 83 112 101 99 116 114 111 103 114 97 109 49 47 73 110 112 117 116 32 66 117 102 102 101 114]))">reverb_fdn/Auditory Spectrogram1/Input Buffer</a>
+</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Error</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Block 'reverb_fdn/Auditory Spectrogram1/Input Buffer' is not supported for HDL code generation. To continue with code generation, comment out this block.</TD>
+</TR>
+<TR><TD style="border: 2px solid; border-collapse: collapse;">
+<a alt="hdlcoder:engine:missingImplementation" href="matlab:hilite(get_param(char([114 101 118 101 114 98 95 102 100 110]),'object'),'none');hilite_system(char([114 101 118 101 114 98 95 102 100 110 47 65 117 100 105 116 111 114 121 32 83 112 101 99 116 114 111 103 114 97 109 49 47 79 117 116 112 117 116 32 66 117 102 102 101 114]))">reverb_fdn/Auditory Spectrogram1/Output Buffer</a>
+</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Error</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Block 'reverb_fdn/Auditory Spectrogram1/Output Buffer' is not supported for HDL code generation. To continue with code generation, comment out this block.</TD>
+</TR>
+<TR><TD style="border: 2px solid; border-collapse: collapse;">
+<a alt="hdlcoder:engine:missingImplementation" href="matlab:hilite(get_param(char([114 101 118 101 114 98 95 102 100 110]),'object'),'none');hilite_system(char([114 101 118 101 114 98 95 102 100 110 47 70 114 111 109 32 77 117 108 116 105 109 101 100 105 97 32 70 105 108 101]))">reverb_fdn/From Multimedia File</a>
+</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Error</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Block 'reverb_fdn/From Multimedia File' is not supported for HDL code generation. To continue with code generation, comment out this block.</TD>
+</TR>
+<TR><TD style="border: 2px solid; border-collapse: collapse;">
+<a alt="hdlcoder:engine:missingImplementation" href="matlab:hilite(get_param(char([114 101 118 101 114 98 95 102 100 110]),'object'),'none');hilite_system(char([114 101 118 101 114 98 95 102 100 110 47 84 111 32 77 117 108 116 105 109 101 100 105 97 32 70 105 108 101]))">reverb_fdn/To Multimedia File</a>
+</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Error</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Block 'reverb_fdn/To Multimedia File' is not supported for HDL code generation. To continue with code generation, comment out this block.</TD>
+</TR>
+<TR><TD style="border: 2px solid; border-collapse: collapse;">
+<a alt="hdlcommon:nativefloatingpoint:DoubleShouldUseNFP" href="matlab:hilite(get_param(char([114 101 118 101 114 98 95 102 100 110]),'object'),'none');hilite_system(char([114 101 118 101 114 98 95 102 100 110 47 65 117 100 105 116 111 114 121 32 83 112 101 99 116 114 111 103 114 97 109]))">reverb_fdn/Auditory Spectrogram</a>
+</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Error</TD>
+<TD style="border: 2px solid; border-collapse: collapse">The model contains "Double" type signals. To generate synthesizable HDL code, either <a href="matlab:configset.internal.open('reverb_fdn','UseFloatingPoint')">select the "Use Floating Point" check box</a> or change the "Double" type signals to fixed-point data type. To generate non-synthesizable and simulation-only HDL code, <a href="matlab:configset.internal.open('reverb_fdn','TreatRealsInGeneratedCodeAs')">set the "Check for presence of reals in generated HDL code" diagnostic to "Warning" or "None"</a>.</TD>
+</TR>
+<TR><TD style="border: 2px solid; border-collapse: collapse;">
+<a alt="hdlcoder:engine:MultirateMultiTasking" href="matlab:hilite(get_param(char([114 101 118 101 114 98 95 102 100 110]),'object'),'none');open_system(char([114 101 118 101 114 98 95 102 100 110]))">reverb_fdn</a>
+</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Error</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Multirate models should have the "Multitask data transfer" and "Single task data transfer" options set to "Error". You can set these options in Modeling -> Model Settings -> Diagnostics -> Sample Time. If you do not use these settings, the generated model and validation may fail to update (Ctrl+D), you may be unable to generate an HDL testbench, and you may have differences in the expected results during validation and verification.</TD>
+</TR>
+<TR><TD style="border: 2px solid; border-collapse: collapse;">
+<a alt="MATLAB:system:unsupportedNonPirMATLABSystemHDL" href="matlab:hilite(get_param(char([114 101 118 101 114 98 95 102 100 110]),'object'),'none');hilite_system(char([114 101 118 101 114 98 95 102 100 110 47 65 117 100 105 116 111 114 121 32 83 112 101 99 116 114 111 103 114 97 109 47 65 117 100 105 116 111 114 121 32 83 112 101 99 116 114 117 109 32 69 120 116 114 97 99 116 111 114]))">reverb_fdn/Auditory Spectrogram/Auditory Spectrum Extractor</a>
+</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Error</TD>
+<TD style="border: 2px solid; border-collapse: collapse">System object 'audio.simulink.AuditorySpectrumExtractor' is not supported for HDL code generation.</TD>
+</TR>
+<TR><TD style="border: 2px solid; border-collapse: collapse;">
+<a alt="MATLAB:system:unsupportedNonPirMATLABSystemHDL" href="matlab:hilite(get_param(char([114 101 118 101 114 98 95 102 100 110]),'object'),'none');hilite_system(char([114 101 118 101 114 98 95 102 100 110 47 65 117 100 105 116 111 114 121 32 83 112 101 99 116 114 111 103 114 97 109 49 47 65 117 100 105 116 111 114 121 32 83 112 101 99 116 114 117 109 32 69 120 116 114 97 99 116 111 114]))">reverb_fdn/Auditory Spectrogram1/Auditory Spectrum Extractor</a>
+</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Error</TD>
+<TD style="border: 2px solid; border-collapse: collapse">System object 'audio.simulink.AuditorySpectrumExtractor' is not supported for HDL code generation.</TD>
+</TR>
+<TR><TD style="border: 2px solid; border-collapse: collapse;">
+<a alt="hdlcoder:engine:ReuseRequiresInvariantConstants" href="matlab:hilite(get_param(char([114 101 118 101 114 98 95 102 100 110]),'object'),'none');open_system(char([114 101 118 101 114 98 95 102 100 110]))">reverb_fdn</a>
+</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Warning</TD>
+<TD style="border: 2px solid; border-collapse: collapse">HDL code from identical atomic subsystems can only be shared when the optimization configuration parameter 'Default parameter behavior' is set to 'Inlined'.</TD>
+</TR>
+<TR><TD style="border: 2px solid; border-collapse: collapse;">
+<a alt="hdlcoder:engine:MultirateSolver" href="matlab:hilite(get_param(char([114 101 118 101 114 98 95 102 100 110]),'object'),'none');open_system(char([114 101 118 101 114 98 95 102 100 110]))">reverb_fdn</a>
+</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Warning</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Multirate models require a <a href="matlab:configset.internal.open('reverb_fdn','SolverType')"> fixed step</a>, <a href="matlab:configset.internal.open('reverb_fdn','SolverName')"> discrete solver</a> in single-tasking mode. Not setting these options may result in failure to update (Ctrl+D) the generated models (like the validation model) and inability to generate an HDL testbench.</TD>
+</TR>
+</TABLE>
+<BR><BR> </div></div></div></div>
+                    <div class="grid_192">
+                        <div class="footer_container">
+                            <div class="footer">
+                                <ul class="footernav">
+                                    <li class="footernav_trademarks"><a href="/home/fermata/Development/Software/MATLAB/R2024a/help/acknowledgments.html">Acknowledgments</a></li>
+                                    <li class="footernav_trademarks"><a href="/home/fermata/Development/Software/MATLAB/R2024a/trademarks.txt">Trademarks</a></li>
+                                    <li class="footernav_patents"><a href="/home/fermata/Development/Software/MATLAB/R2024a/patents.txt">Patents</a></li>
+                                    <li class="footernav_help"><a href="/home/fermata/Development/Software/MATLAB/R2024a/license_agreement.txt">Terms of Use</a></li>
+                                </ul>
+                                <div class="copyright">&copy; 1994-2024 The MathWorks, Inc.</div>
+                            </div>
+                        </div>
+                    </div>
+
+        <script type="text/javascript">
+
+$(document).ready( setTimeout( function () {
+                   $(".expandAllLink").trigger('click');
+            }, 50 ) );
+
+        </script>
+        
+</body>
+</html>

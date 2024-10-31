@@ -73,7 +73,7 @@ module i2c_adc_controller
                       ack_error <= 0;   // 清除之前的错误状态
                       sda_reg <= 1;     // 初始状态为高
                       scl <= 1;         // 保持SCL为高电平
-                      data_reg <= data; // 存储要发送的数据
+                      //data_reg <= data; // 存储要发送的数据
                       state <= INIT_REG1;   // 进入初始化存储器1状态
                   end else state <= IDLE;
               end
@@ -134,6 +134,7 @@ module i2c_adc_controller
               end
               WAIT_DELAY: begin
                   state <= next_state;
+
 /* -----\/----- EXCLUDED -----\/-----
                   // 等待延时完成
                   if (delay_cnt < 2) begin
@@ -190,6 +191,7 @@ module i2c_adc_controller
                   end else begin
                       bit_cnt <= 0;  // 重置位计数器
                       sda_dir <= 0;  // 设置为输入，准备发送ACK
+                      next_state <= REG_ADDR;
                       state <= WAIT_DELAY;  // 进入延时状态
                   end
               end
@@ -204,6 +206,7 @@ module i2c_adc_controller
                   end else begin
                       bit_cnt <= 0;  // 重置位计数器
                       sda_dir <= 0;  // 设置为输入，准备发送ACK
+                      next_state <= DATA;
                       state <= WAIT_DELAY;  // 进入延时状态
                   end
               end
