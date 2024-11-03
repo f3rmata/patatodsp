@@ -17,14 +17,12 @@ module es9821q_controller
     // 实例化I2C控制模块（用于ADC）
     i2c_adc_controller i2c_adc_inst
       (
-       .clk(clk),
-       .reset(1'b1),             // 使用同步后的复位信号，低电平有效
-       .start(1'b1),                 // 启动I2C传输的信号
+       .sys_clk(clk),
+       .rst_n(1'b1),             // 使用同步后的复位信号，低电平有效
+       .i2c_start(1'b1),                 // 启动I2C传输的信号
        //.addr(i2c_addr_adc),      // ADC的I2C地址
        .scl(scl_adc),
-       .sda(sda_adc),
-       .busy(busy_adc),
-       .ack_error(ack_error_adc) // 连接应答错误信号
+       .sda(sda_adc)
        );
 
 endmodule

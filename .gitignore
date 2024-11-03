@@ -4,3 +4,5 @@ hdlsrc/gowin_prj/es9821q/impl
 hdlsrc/gowin_prj/es9821q/sim
 hdlsrc/gowin_prj/patatodsp/impl
 hdlsrc/gowin_prj/patatodsp/sim
+hdlsrc/gowin_prj/adc_i2c_test/impl
+matlab/slprj

@@ -1,0 +1,2 @@
+chorus/Cosine HDL Optimized --> Cosine_HDL_Optimized
+chorus --> chorus
