@@ -6,3 +6,9 @@ hdlsrc/gowin_prj/patatodsp/impl
 hdlsrc/gowin_prj/patatodsp/sim
 hdlsrc/gowin_prj/adc_i2c_test/impl
 matlab/slprj
+hdlsrc/gowin_prj/ch62_audio_loopback/impl/gwsynthesis
+hdlsrc/gowin_prj/ch62_audio_loopback/impl/pnr
+matlab/hdlsrc/chorus/dumped_sin.vcd
+matlab/hdlsrc/chorus/wave
+hdlsrc/gowin_prj/ch62_audio_loopback/impl/temp/rtl_parser.result
+hdlsrc/gowin_prj/ch62_audio_loopback/impl/temp/rtl_parser_arg.json
