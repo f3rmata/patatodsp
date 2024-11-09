@@ -1,17 +1,18 @@
-module audio_lookback(
-		input clk,                    
-		input reset_n,                                   
-		inout iic_0_scl,              
-		inout iic_0_sda,   
-	    output led,
-		
-		input I2S_ADCDAT,
-		input I2S_ADCLRC,
-		input I2S_BCLK,
-		output I2S_DACDAT,
-		input I2S_DACLRC,
-		output I2S_MCLK
-);
+module audio_lookback
+  (
+   input		 clk,
+   input		 reset_n,
+   inout		 iic_0_scl,
+   inout		 iic_0_sda,
+   output		 led,
+
+   input		 I2S_ADCDAT,
+   input		 I2S_ADCLRC,
+   input		 I2S_BCLK,
+   output		 I2S_DACDAT,
+   input		 I2S_DACLRC,
+   output		 I2S_MCLK
+   );
 	
 	parameter DATA_WIDTH        = 32;     
 	
@@ -56,7 +57,53 @@ module audio_lookback(
 		end
 	end
 
+	wire [31:0] effect_out;
+	wire		out_valid;
+	reg [29:0]	period;
+	wire [5:0]	lfo_o;
+	reg [31:0]	effect_chorus_in;
+	wire [31:0]	effect_chorus_out;
 
+	// assign sin_out = {2'b0,12'd2048 - lfo_o} + 14'd6144;
+	// assign dac_clk = clk;
+
+	always @(posedge clk or negedge reset_n) begin
+		if (!reset_n)
+		  effect_chorus_in <= 32'd0;
+		else
+		  effect_chorus_in <= adcfifo_readdata;
+	end
+
+	LFO LFO_inst
+	  (
+	   .clk(clk),
+	   .rst_n(reset_n),
+	   .period(period),
+	   .out_valid(out_valid),
+	   .sin_out(lfo_o)
+	   );
+
+	chorus chorus_inst_l
+	  (
+	   .clk(clk),
+	   .reset_n(reset_n),
+	   .clk_enable(1'b1),
+	   .In1(effect_chorus_in[15:0]),
+	   .In2(16'd10),
+	   .Out1(effect_chorus_out[15:0])
+	   );
+
+	chorus chorus_inst_r
+	  (
+	   .clk(clk),
+	   .reset_n(reset_n),
+	   .clk_enable(1'b1),
+	   .In1(effect_chorus_in[31:16]),
+	   .In2(16'd10),
+	   .Out1(effect_chorus_out[31:16])
+	   );
+
+	assign effect_out = effect_chorus_out;
 
 /* -----\/----- EXCLUDED -----\/-----
 	reg [15:0] Drive = 16'd50;
@@ -81,15 +128,12 @@ module audio_lookback(
 	   .Out1(effect_dist_out[31:16]));
  -----/\----- EXCLUDED -----/\----- */
 
-
-
-
 	always @(posedge clk or negedge reset_n) begin
 		if(~reset_n)
 			dacfifo_write <= 1'd0;
 		else if(~dacfifo_full && (~adcfifo_empty)) begin
 			dacfifo_write <= 1'd1;
-			dacfifo_writedata <= effect_dist_out;
+			dacfifo_writedata <= effect_out;
 		end
 		else begin
 			dacfifo_write <= 1'd0;

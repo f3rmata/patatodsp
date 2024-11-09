@@ -10,6 +10,10 @@
         <File path="src/WM8960_Init/i2c_bit_shift.v" type="file.verilog" enable="1"/>
         <File path="src/WM8960_Init/i2c_control.v" type="file.verilog" enable="1"/>
         <File path="src/WM8960_Init/wm8960_init_table.v" type="file.verilog" enable="1"/>
+        <File path="src/dds/dds.v" type="file.verilog" enable="1"/>
+        <File path="src/dds_ii/dds_ii.v" type="file.verilog" enable="1"/>
+        <File path="src/effects/LFO.v" type="file.verilog" enable="1"/>
+        <File path="src/effects/chorus.v" type="file.verilog" enable="1"/>
         <File path="src/effects/distortion.v" type="file.verilog" enable="1"/>
         <File path="src/fifo/async_fifo.v" type="file.verilog" enable="1"/>
         <File path="src/fifo/async_fifo_ctrl.v" type="file.verilog" enable="1"/>
@@ -19,5 +23,7 @@
         <File path="src/i2s/i2s_tx.v" type="file.verilog" enable="1"/>
         <File path="src/top/audio_lookback.v" type="file.verilog" enable="1"/>
         <File path="src/audio_loopback.cst" type="file.cst" enable="1"/>
+        <File path="src/audio_loopback.gao" type="file.gao" enable="0"/>
+        <File path="src/audio_loopback.rao" type="file.gao" enable="0"/>
     </FileList>
 </Project>
