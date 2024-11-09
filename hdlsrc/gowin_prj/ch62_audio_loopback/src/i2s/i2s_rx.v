@@ -33,21 +33,22 @@ reg adclrc_r0;
 reg adclrc_r1;
 reg adcdat_r0;
 reg adcdat_r1;
+
 always @(posedge bclk) begin
     adclrc_r0 <= adclrc;
     adclrc_r1 <= adclrc_r0;
     adcdat_r0 <= adcdat;
-	 adcdat_r1 <= adcdat_r0;
+    adcdat_r1 <= adcdat_r0;
 end
 
 always@(posedge bclk or negedge reset_n)
 if(~reset_n) begin
-	adclrc_nege <= 1'd0;
-	adclrc_pose <= 1'd0;
+    adclrc_nege <= 1'd0;
+    adclrc_pose <= 1'd0;
 end
 else begin
-	adclrc_nege <= adclrc_r1 & (!adclrc_r0);
-	adclrc_pose <= (!adclrc_r1) & adclrc_r0;
+    adclrc_nege <= adclrc_r1 & (!adclrc_r0);
+    adclrc_pose <= (!adclrc_r1) & adclrc_r0;
 end
 
 

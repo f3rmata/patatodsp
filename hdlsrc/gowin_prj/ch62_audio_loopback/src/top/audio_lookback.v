@@ -58,22 +58,43 @@ module audio_lookback(
 
 
 
+/* -----\/----- EXCLUDED -----\/-----
+	reg [15:0] Drive = 16'd50;
+	reg [31:0]	effect_dist_in;
+	wire [31:0]	effect_dist_out;
+
+	always @(posedge clk or negedge reset_n) begin
+		if (!reset_n)
+		  effect_dist_in <= 32'd0;
+		else
+		  effect_dist_in <= adcfifo_readdata;
+	end
+
+	distortion dist_inst1
+	  (.In1(effect_dist_in[15:0]),
+	   .Drive(Drive),
+	   .Out1(effect_dist_out[15:0]));
+
+	distortion dist_inst2
+	  (.In1(effect_dist_in[31:16]),
+	   .Drive(Drive),
+	   .Out1(effect_dist_out[31:16]));
+ -----/\----- EXCLUDED -----/\----- */
 
 
-	always @ (posedge clk or negedge reset_n)
-	begin
+
+
+	always @(posedge clk or negedge reset_n) begin
 		if(~reset_n)
 			dacfifo_write <= 1'd0;
 		else if(~dacfifo_full && (~adcfifo_empty)) begin
 			dacfifo_write <= 1'd1;
-			dacfifo_writedata <= adcfifo_readdata;
+			dacfifo_writedata <= effect_dist_out;
 		end
 		else begin
 			dacfifo_write <= 1'd0;
 		end
 	end
-
-
 
 
 

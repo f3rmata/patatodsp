@@ -10,6 +10,7 @@
         <File path="src/WM8960_Init/i2c_bit_shift.v" type="file.verilog" enable="1"/>
         <File path="src/WM8960_Init/i2c_control.v" type="file.verilog" enable="1"/>
         <File path="src/WM8960_Init/wm8960_init_table.v" type="file.verilog" enable="1"/>
+        <File path="src/effects/distortion.v" type="file.verilog" enable="1"/>
         <File path="src/fifo/async_fifo.v" type="file.verilog" enable="1"/>
         <File path="src/fifo/async_fifo_ctrl.v" type="file.verilog" enable="1"/>
         <File path="src/fifo/dpram.v" type="file.verilog" enable="1"/>
