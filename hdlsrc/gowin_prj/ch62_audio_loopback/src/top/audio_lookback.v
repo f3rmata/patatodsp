@@ -59,6 +59,36 @@ module audio_lookback
 
 	wire [31:0] effect_out;
 	wire		out_valid;
+
+	reg [31:0]	effect_reverb_in;
+	wire [31:0]	effect_reverb_out;
+
+	always @(posedge clk or negedge reset_n) begin
+		if (!reset_n)
+		  effect_reverb_in <= 32'd0;
+		else
+		  effect_reverb_in <= adcfifo_readdata;
+	end
+
+	reverb_fdn_m reverb_inst_l
+	  (
+	   .clk(clk),
+	   .rst_n(reset_n),
+	   .audio_in(effect_reverb_in[15:0]),
+	   .audio_out(effect_reverb_out[15:0])
+		);
+
+	reverb_fdn_m reverb_inst_r
+	  (
+	   .clk(clk),
+	   .rst_n(reset_n),
+	   .audio_in(effect_reverb_in[31:16]),
+	   .audio_out(effect_reverb_out[31:16])
+	   );
+
+	assign effect_out = effect_reverb_out;
+
+/* -----\/----- EXCLUDED -----\/-----
 	reg [29:0]	period;
 	wire [5:0]	lfo_o;
 	reg [31:0]	effect_chorus_in;
@@ -104,6 +134,7 @@ module audio_lookback
 	   );
 
 	assign effect_out = effect_chorus_out;
+ -----/\----- EXCLUDED -----/\----- */
 
 /* -----\/----- EXCLUDED -----\/-----
 	reg [15:0] Drive = 16'd50;

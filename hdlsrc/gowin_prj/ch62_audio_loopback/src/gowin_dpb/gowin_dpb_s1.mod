@@ -1,0 +1,24 @@
+-series GW5A
+-device GW5A-25
+-device_version A
+-package UBGA324
+-part_number GW5A-LV25UG324C2/I1
+
+
+-mod_name Gowin_DPB_S1
+-file_name gowin_dpb_s1
+-path /home/fermata/Development/FPGA/patatodsp/hdlsrc/gowin_prj/ch62_audio_loopback/src/gowin_dpb/
+-type RAM_DP
+-file_type vlg
+-bram_b true
+-dev_type GW5A-25A
+-depth_0 2500
+-depth_1 2500
+-width_0 16
+-width_1 16
+-read_mode_0 bypass
+-read_mode_1 bypass
+-write_mode_0 normal
+-write_mode_1 normal
+-speed false
+-reset_mode sync

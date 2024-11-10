@@ -2,7 +2,7 @@
 Roomsize = 0.7;
 Mix = 1;
 damp = 0.2;
-d1 = 5;
+d1 = 20;
 feedback = 0.84;
 
 h = hadamard(4)./2;
