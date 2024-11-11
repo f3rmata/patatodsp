@@ -22,7 +22,7 @@ module LFO
             if (clk_cnt >= period) begin
                 clk_cnt <= 0;
                 phase_valid <= 1'b1;
-                if (phase >= 12'd4095) begin
+                if (phase >= 6'd1023) begin
                     phase <= 0;
                     phase_valid <= 0;
                 end else phase <= phase + 1'b1;

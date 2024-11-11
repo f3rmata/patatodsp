@@ -60,6 +60,100 @@ module audio_lookback
 	wire [31:0] effect_out;
 	wire		out_valid;
 
+/* -----\/----- EXCLUDED -----\/-----
+	reg [31:0]	effect_flanger_in;
+	wire [31:0]	effect_flanger_out;
+
+	reg [29:0]	period = 25000;
+	wire [5:0]	lfo_o;
+
+	LFO LFO_inst
+	  (
+	   .clk(clk),
+	   .rst_n(reset_n),
+	   .period(period),
+	   .out_valid(out_valid),
+	   .sin_out(lfo_o)
+	   );
+
+	always @(posedge clk or negedge reset_n) begin
+		if (!reset_n)
+		  effect_flanger_in <= 0;
+		else
+		  effect_flanger_in <= adcfifo_readdata;
+	end
+
+	flanger flanger_inst_l
+	  (
+	   .clk(clk),
+	   .reset_n(reset_n),
+	   .delay(1000),
+	   .clk_enable(1'b1),
+	   .In1(effect_flanger_in[15:0]),
+	   .Out1(effect_flanger_out[15:0])
+	   );
+
+	flanger flanger_inst_r
+	  (
+	   .clk(clk),
+	   .reset_n(reset_n),
+	   .delay(1000),
+	   .clk_enable(1'b1),
+	   .In1(effect_flanger_in[31:16]),
+	   .Out1(effect_flanger_out[31:16])
+	   );
+
+	assign effect_out = effect_flanger_out;
+
+ -----/\----- EXCLUDED -----/\----- */
+
+/* -----\/----- EXCLUDED -----\/-----
+	reg [31:0]	effect_echo_in;
+	wire [31:0]	effect_echo_out;
+
+	reg [29:0]	period = 25000;
+	wire [5:0]	lfo_o;
+
+	LFO LFO_inst
+	  (
+	   .clk(clk),
+	   .rst_n(reset_n),
+	   .period(period),
+	   .out_valid(out_valid),
+	   .sin_out(lfo_o)
+	   );
+
+
+	always @(posedge clk or negedge reset_n) begin
+		if (!reset_n)
+		  effect_echo_in <= 0;
+		else
+		  effect_echo_in <= adcfifo_readdata;
+	end
+
+	echo_effect_small_delay echo_inst_l
+	  (
+	   .clk(clk),
+	   .reset_n(reset_n),
+	   .delay(1000),
+	   .clk_enable(1'b1),
+	   .audio_in(effect_echo_in[15:0]),
+	   .audio_out(effect_echo_out[15:0])
+	   );
+
+	echo_effect_small_delay echo_inst_r
+	  (
+	   .clk(clk),
+	   .reset_n(reset_n),
+	   .delay(1000),
+	   .clk_enable(1'b1),
+	   .audio_in(effect_echo_in[31:16]),
+	   .audio_out(effect_echo_out[31:16])
+	   );
+
+	assign effect_out = effect_echo_out;
+
+ -----/\----- EXCLUDED -----/\----- */
 	reg [31:0]	effect_reverb_in;
 	wire [31:0]	effect_reverb_out;
 

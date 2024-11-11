@@ -7,7 +7,6 @@ module reverb_fdn_m
     input wire           rst_n,
     input signed [15:0]  audio_in,
     // input wire [5:0]   mix,
-
     output signed [15:0] audio_out
   );
 
@@ -16,12 +15,12 @@ module reverb_fdn_m
     reg [10:0]  buffer_i_s1 = 0;
     reg [11:0]  buffer_i_s2 = 0;
     reg [12:0]  buffer_i_s3 = 0;
-    reg [13:0]  buffer_i_s4 = 0;
+    reg [12:0]  buffer_i_s4 = 0;
 
     reg [10:0]  buffer_i_s1_tapped = 0;
     reg [11:0]  buffer_i_s2_tapped = 0;
     reg [12:0]  buffer_i_s3_tapped = 0;
-    reg [13:0]  buffer_i_s4_tapped = 0;
+    reg [12:0]  buffer_i_s4_tapped = 0;
 
     always @(posedge clk or negedge rst_n) begin
         if (~rst_n) begin
@@ -40,22 +39,22 @@ module reverb_fdn_m
               if (buffer_i_s1 >= 11'd2047) buffer_i_s1 <= 0;
               else begin
                   buffer_i_s1 <= buffer_i_s1 + 1'b1;
-                  buffer_i_s1_tapped <= buffer_i_s1 - DELAY_TAPS;
+                  buffer_i_s1_tapped <= buffer_i_s1 + DELAY_TAPS;
               end
               if (buffer_i_s2 >= 12'd4095) buffer_i_s2 <= 0;
               else begin
                   buffer_i_s2 <= buffer_i_s2 + 1'b1;
-                  buffer_i_s2_tapped <= buffer_i_s2 - 2*DELAY_TAPS;
+                  buffer_i_s2_tapped <= buffer_i_s2 + 2*DELAY_TAPS;
               end
               if (buffer_i_s3 >= 13'd8191) buffer_i_s3 <= 0;
               else begin
                   buffer_i_s3 <= buffer_i_s3 + 1'b1;
-                  buffer_i_s3_tapped <= buffer_i_s3 - 4*DELAY_TAPS;
+                  buffer_i_s3_tapped <= buffer_i_s3 + 4*DELAY_TAPS;
               end
-              if (buffer_i_s4 >= 14'd10000) buffer_i_s4 <= 0;
+              if (buffer_i_s4 >= 13'd8191) buffer_i_s4 <= 0;
               else begin
                   buffer_i_s4 <= buffer_i_s4 + 1'b1;
-                  buffer_i_s4_tapped <= buffer_i_s4 - 8*DELAY_TAPS;
+                  buffer_i_s4_tapped <= buffer_i_s4 + 6*DELAY_TAPS;
               end
               // circular_buffer[buffer_i] <= audio_in;
           end // else: !if(~rst_n)
@@ -83,9 +82,9 @@ module reverb_fdn_m
         .clkb(clk), //input clkb
         .ceb(1'b1), //input ceb
         .reset(~rst_n), //input reset
-        .ada(buffer_i_s1), //input [10:0] ada
+        .ada(buffer_i_s1_tapped), //input [10:0] ada
         .din(audio_in_s1), //input [15:0] din
-        .adb(buffer_i_s1_tapped) //input [10:0] adb
+        .adb(buffer_i_s1) //input [10:0] adb
     );
 
     Gowin_SDPB_S2 cb_s2
@@ -96,9 +95,9 @@ module reverb_fdn_m
         .clkb(clk), //input clkb
         .ceb(1'b1), //input ceb
         .reset(~rst_n), //input reset
-        .ada(buffer_i_s2), //input [10:0] ada
+        .ada(buffer_i_s2_tapped), //input [10:0] ada
         .din(audio_in_s2), //input [15:0] din
-        .adb(buffer_i_s2_tapped) //input [10:0] adb
+        .adb(buffer_i_s2) //input [10:0] adb
     );
 
     Gowin_SDPB_S3 cb_s3
@@ -109,9 +108,9 @@ module reverb_fdn_m
         .clkb(clk), //input clkb
         .ceb(1'b1), //input ceb
         .reset(~rst_n), //input reset
-        .ada(buffer_i_s3), //input [10:0] ada
+        .ada(buffer_i_s3_tapped), //input [10:0] ada
         .din(audio_in_s3), //input [15:0] din
-        .adb(buffer_i_s3_tapped) //input [10:0] adb
+        .adb(buffer_i_s3) //input [10:0] adb
     );
 
     Gowin_SDPB_S4 cb_s4
@@ -122,17 +121,17 @@ module reverb_fdn_m
         .clkb(clk), //input clkb
         .ceb(1'b1), //input ceb
         .reset(~rst_n), //input reset
-        .ada(buffer_i_s4), //input [10:0] ada
+        .ada(buffer_i_s4_tapped), //input [10:0] ada
         .din(audio_in_s4), //input [15:0] din
-        .adb(buffer_i_s4_tapped) //input [10:0] adb
+        .adb(buffer_i_s4) //input [10:0] adb
     );
 
+/* -----\/----- EXCLUDED -----\/-----
     wire [31:0] sum_s1;
     wire signed [31:0] sum_s2;
     wire signed [31:0] sum_s3;
     wire signed [31:0] sum_s4;
 
-/* -----\/----- EXCLUDED -----\/-----
     assign sum_s1 = audio_delay_1 * 16 + audio_in * 16;
     assign sum_s2 = audio_delay_2 / 16'd4 + audio_in;
     assign sum_s3 = audio_delay_3 / 16'd8 + audio_in;
@@ -162,14 +161,18 @@ module reverb_fdn_m
         end else
           begin
               //audio_in_s0 <= audio_in;
-              audio_in_s1 <= h_s1 >> 16;
-              audio_in_s2 <= h_s2 >> 16;
-              audio_in_s3 <= h_s3 >> 16;
-              audio_in_s4 <= h_s4 >> 16;
-              h_s1 <= (audio_delay_0 + audio_delay_1 + audio_delay_2 + audio_delay_3 + audio_delay_4) << 14;
-              h_s2 <= (audio_delay_0 + audio_delay_1 - audio_delay_2 + audio_delay_3 - audio_delay_4) << 14;
-              h_s3 <= (audio_delay_0 + audio_delay_1 + audio_delay_2 - audio_delay_3 - audio_delay_4) << 14;
-              h_s4 <= (audio_delay_0 + audio_delay_1 - audio_delay_2 - audio_delay_3 + audio_delay_4) << 14;
+              audio_in_s1 <= h_s1 >> 1;
+              audio_in_s2 <= h_s2 >> 1;
+              audio_in_s3 <= h_s3 >> 1;
+              audio_in_s4 <= h_s4 >> 1;
+              h_s1 <= $signed(audio_delay_0
+                      + (audio_delay_1 + audio_delay_2 + audio_delay_3 + audio_delay_4) / 2);
+              h_s2 <= $signed(audio_delay_0
+                       + (audio_delay_1 - audio_delay_2 + audio_delay_3 - audio_delay_4) / 2);
+              h_s3 <= $signed(audio_delay_0
+                       + (audio_delay_1 + audio_delay_2 - audio_delay_3 - audio_delay_4) / 2);
+              h_s4 <= $signed(audio_delay_0
+                       + (audio_delay_1 - audio_delay_2 - audio_delay_3 + audio_delay_4) / 2);
           end // else: !if(~rst_n)
     end // always @ (posedge clk or negedge rst_n)
 
@@ -184,11 +187,27 @@ module reverb_fdn_m
 
     // assign mix = audio_delay_1 + audio_delay_0;
 
-    // assign audio_out = mix[31:16];
-    assign audio_out = audio_delay_1;
-    // assign audio_out = audio_delay_1 / 4 + audio_delay_4 / 4
-    //                   + audio_delay_2 / 4 + audio_delay_3 / 4;
+    wire signed [31:0] mix;
+    reg signed [31:0] mix_d;
+    wire signed [31:0] mix_o;
 
+    assign mix = $signed(audio_delay_0 / 2 + audio_delay_1 + audio_delay_4 + audio_delay_2 + audio_delay_3);
+
+    always @(posedge clk or negedge rst_n) begin
+        if (~rst_n) begin
+            mix_d <= 0;
+        end
+        else begin
+            mix_d <= mix;
+        end
+    end
+
+
+    assign mix_o = mix_d + mix / 32;
+    // assign audio_out = mix[31:16];
+    //assign audio_out = audio_delay_1;
+    assign audio_out = mix_o;
+    //assign audio_out = (mix > 32767) ? 32767 : (mix < -32768) ? -32768 : mix[31:16];
 
 /* -----\/----- EXCLUDED -----\/-----
     always @* begin
