@@ -119,7 +119,7 @@ module audio_lookback
 	   .reset_n(reset_n),
 	   .clk_enable(1'b1),
 	   .In1(effect_chorus_in[15:0]),
-	   .In2(16'd10),
+	   .In2(6'd63),
 	   .Out1(effect_chorus_out[15:0])
 	   );
 
@@ -129,13 +129,13 @@ module audio_lookback
 	   .reset_n(reset_n),
 	   .clk_enable(1'b1),
 	   .In1(effect_chorus_in[31:16]),
-	   .In2(16'd10),
+	   .In2(6'd63),
 	   .Out1(effect_chorus_out[31:16])
 	   );
 
 	assign effect_out = effect_chorus_out;
- -----/\----- EXCLUDED -----/\----- */
 
+ -----/\----- EXCLUDED -----/\----- */
 /* -----\/----- EXCLUDED -----\/-----
 	reg [15:0] Drive = 16'd50;
 	reg [31:0]	effect_dist_in;

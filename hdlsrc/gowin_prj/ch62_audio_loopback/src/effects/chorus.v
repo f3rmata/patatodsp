@@ -1,89 +1,58 @@
 `timescale 1 ns / 1 ns
 
 module chorus
-          (clk,
-           reset_n,
-           clk_enable,
-           In1,
-           In2,
-           ce_out,
-           Out1);
+  (
+    input   clk,
+    input   reset_n,
+    input   clk_enable,
+    input   [15:0] In1,    // uint16
+    input   [5:0] In2,    // uint16
+    output  ce_out,
+    output  [15:0] Out1
+  );
 
+  // 延迟线
+  reg signed [15:0] Delay1_reg [0:512];
+  wire signed [15:0] Delay1_out1;
+  wire signed [31:0] Gain1_out1;
+  wire signed [31:0] Gain2_out1;
+  wire signed [31:0] Sum1_add_temp;
+  wire signed [15:0] Sum1_out1;
 
-  input   clk;
-  input   reset_n;
-  input   clk_enable;
-  input   [15:0] In1;  // uint16
-  input   [15:0] In2;  // uint16
-  output  ce_out;
-  output  [15:0] Out1;  // uint16
+  // 局部变量
+  integer i;
 
+  assign ce_out = clk_enable;
 
-  wire enb;
-  reg [15:0] Delay1_reg [0:63];  // ufix16 [64]
-  reg [15:0] Delay1_reg_next [0:63];  // ufix16 [64]
-  reg [15:0] Delay1_out1;  // uint16
-  wire [31:0] Gain1_out1;  // ufix32_En16
-  wire [31:0] Gain2_out1;  // ufix32_En16
-  wire [31:0] Sum1_add_cast;  // ufix32
-  wire [31:0] Sum1_add_cast_1;  // ufix32
-  wire [31:0] Sum1_add_temp;  // ufix32
-  wire [15:0] Sum1_out1;  // uint16
-  reg signed [31:0] Delay1_t_0_0;  // int32
-  reg signed [31:0] Delay1_t_0_1;  // int32
-  reg signed [31:0] Delay1_t_1;  // int32
-
-
-  assign enb = clk_enable;
-
-  always @(posedge clk or negedge reset_n)
-    begin : Delay1_process
-      if (reset_n == 1'b0) begin
-        for(Delay1_t_1 = 32'sd0; Delay1_t_1 <= 32'sd63; Delay1_t_1 = Delay1_t_1 + 32'sd1) begin
-          Delay1_reg[Delay1_t_1] <= 16'b0000000000000000;
-        end
+  // 移位寄存器 更新延迟线方便一点
+  always @(posedge clk or negedge reset_n) begin
+    if (~reset_n) begin
+      // 复位时，清空延迟线
+      for (i = 0; i < 63; i = i + 1) begin
+        Delay1_reg[i] <= 16'b0;  // 清空延迟线
       end
-      else begin
-        if (enb) begin
-          for(Delay1_t_0_1 = 32'sd0; Delay1_t_0_1 <= 32'sd63; Delay1_t_0_1 = Delay1_t_0_1 + 32'sd1) begin
-            Delay1_reg[Delay1_t_0_1] <= Delay1_reg_next[Delay1_t_0_1];
-          end
-        end
+    end else if (clk_enable) begin
+      // 逐个更新延迟线，向右移位并插入新的 In1
+      for (i = 0; i < In2; i = i + 1) begin
+        Delay1_reg[i+1] <= Delay1_reg[i];  // 右移
       end
+      Delay1_reg[0] <= In1;  // 将 In1 插入到延迟线的第一个位置
     end
-
-  always @* begin
-    Delay1_out1 = Delay1_reg[63];
-    Delay1_reg_next[0] = In1;
-
-    for(Delay1_t_0_0 = 32'sd0; Delay1_t_0_0 <= 32'sd62; Delay1_t_0_0 = Delay1_t_0_0 + 32'sd1) begin
-      Delay1_reg_next[Delay1_t_0_0 + 32'sd1] = Delay1_reg[Delay1_t_0_0];
-    end
-
   end
 
 
-
-  // assign Gain1_out1 = 16'b1011010011111110 * Delay1_out1;
-    assign Gain1_out1 = Delay1_out1;
+  assign Delay1_out1 = Delay1_reg[63];
 
 
-
-  // assign Gain2_out1 = 16'b1100110011001101 * In1;
-    assign Gain2_out1 = In1;
-
+  assign Gain1_out1 = $signed(16'b1011010011111110) * Delay1_out1;  // （有符号）
+  assign Gain2_out1 = $signed(16'b1100110011001101) * In1;         // （有符号）
 
 
-  assign Sum1_add_cast = ({16'b0, Gain1_out1[31:16]}) + Gain1_out1[15];
-  assign Sum1_add_cast_1 = ({16'b0, Gain2_out1[31:16]}) + Gain2_out1[15];
-  assign Sum1_add_temp = Sum1_add_cast + Sum1_add_cast_1;
-  // assign Sum1_out1 = (Sum1_add_temp[31:16] != 16'b0000000000000000 ? 16'b1111111111111111 :
-  //             Sum1_add_temp[15:0]);
+  assign Sum1_add_temp = $signed(Gain1_out1) + $signed(Gain2_out1);
 
-  assign Sum1_out1 = Sum1_add_temp[15:0];
+  // 输出
+  assign Sum1_out1 = Sum1_add_temp[15:0];  // （有符号）
 
   assign Out1 = Sum1_out1;
-
-  assign ce_out = clk_enable;
 
 endmodule  // chorus

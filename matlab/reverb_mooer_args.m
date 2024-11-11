@@ -5,7 +5,7 @@ damp = 0.2;
 d1 = 20;
 feedback = 0.84;
 
-h = hadamard(4)./2;
+h = hadamard(4);
 o = [0,1,1,0;-1,0,0,-1;1,0,0,-1;0,1,-1,0];
 
 % T60 Delay / Sample rate at 192kHz

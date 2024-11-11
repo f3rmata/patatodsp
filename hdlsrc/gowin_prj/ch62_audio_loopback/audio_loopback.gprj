@@ -20,9 +20,13 @@
         <File path="src/fifo/async_fifo.v" type="file.verilog" enable="1"/>
         <File path="src/fifo/async_fifo_ctrl.v" type="file.verilog" enable="1"/>
         <File path="src/fifo/dpram.v" type="file.verilog" enable="1"/>
-        <File path="src/gowin_dpb/gowin_dpb_s1.v" type="file.verilog" enable="1"/>
+        <File path="src/gowin_dpb/gowin_dpb_s1.v" type="file.verilog" enable="0"/>
         <File path="src/gowin_pll/gowin_pll.v" type="file.verilog" enable="1"/>
-        <File path="src/gowin_sdpb/gowin_sdpb.v" type="file.verilog" enable="1"/>
+        <File path="src/gowin_sdpb/gowin_sdpb.v" type="file.verilog" enable="0"/>
+        <File path="src/gowin_sdpb/gowin_sdpb_s1.v" type="file.verilog" enable="1"/>
+        <File path="src/gowin_sdpb/gowin_sdpb_s2.v" type="file.verilog" enable="1"/>
+        <File path="src/gowin_sdpb/gowin_sdpb_s3.v" type="file.verilog" enable="1"/>
+        <File path="src/gowin_sdpb/gowin_sdpb_s4.v" type="file.verilog" enable="1"/>
         <File path="src/i2s/i2s_rx.v" type="file.verilog" enable="1"/>
         <File path="src/i2s/i2s_tx.v" type="file.verilog" enable="1"/>
         <File path="src/top/audio_lookback.v" type="file.verilog" enable="1"/>
