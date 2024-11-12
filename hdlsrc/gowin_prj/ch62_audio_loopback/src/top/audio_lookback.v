@@ -60,12 +60,11 @@ module audio_lookback
 	wire [31:0] effect_out;
 	wire		out_valid;
 
-/* -----\/----- EXCLUDED -----\/-----
 	reg [31:0]	effect_flanger_in;
 	wire [31:0]	effect_flanger_out;
 
 	reg [29:0]	period = 25000;
-	wire [5:0]	lfo_o;
+	wire [8:0]	lfo_o;
 
 	LFO LFO_inst
 	  (
@@ -87,7 +86,7 @@ module audio_lookback
 	  (
 	   .clk(clk),
 	   .reset_n(reset_n),
-	   .delay(1000),
+	   .delay(lfo_o),
 	   .clk_enable(1'b1),
 	   .In1(effect_flanger_in[15:0]),
 	   .Out1(effect_flanger_out[15:0])
@@ -97,7 +96,7 @@ module audio_lookback
 	  (
 	   .clk(clk),
 	   .reset_n(reset_n),
-	   .delay(1000),
+	   .delay(lfo_o),
 	   .clk_enable(1'b1),
 	   .In1(effect_flanger_in[31:16]),
 	   .Out1(effect_flanger_out[31:16])
@@ -105,9 +104,7 @@ module audio_lookback
 
 	assign effect_out = effect_flanger_out;
 
- -----/\----- EXCLUDED -----/\----- */
 
-/* -----\/----- EXCLUDED -----\/-----
 	reg [31:0]	effect_echo_in;
 	wire [31:0]	effect_echo_out;
 
@@ -135,7 +132,7 @@ module audio_lookback
 	  (
 	   .clk(clk),
 	   .reset_n(reset_n),
-	   .delay(1000),
+	   .delay(lfo_o),
 	   .clk_enable(1'b1),
 	   .audio_in(effect_echo_in[15:0]),
 	   .audio_out(effect_echo_out[15:0])
@@ -145,15 +142,14 @@ module audio_lookback
 	  (
 	   .clk(clk),
 	   .reset_n(reset_n),
-	   .delay(1000),
+	   .delay(lfo_o),
 	   .clk_enable(1'b1),
 	   .audio_in(effect_echo_in[31:16]),
 	   .audio_out(effect_echo_out[31:16])
 	   );
 
-	assign effect_out = effect_echo_out;
+	// assign effect_out = effect_echo_out;
 
- -----/\----- EXCLUDED -----/\----- */
 	reg [31:0]	effect_reverb_in;
 	wire [31:0]	effect_reverb_out;
 
@@ -180,11 +176,10 @@ module audio_lookback
 	   .audio_out(effect_reverb_out[31:16])
 	   );
 
-	assign effect_out = effect_reverb_out;
+	// assign effect_out = effect_reverb_out;
 
-/* -----\/----- EXCLUDED -----\/-----
 	reg [29:0]	period;
-	wire [5:0]	lfo_o;
+	wire [8:0]	lfo_o;
 	reg [31:0]	effect_chorus_in;
 	wire [31:0]	effect_chorus_out;
 
@@ -211,26 +206,23 @@ module audio_lookback
 	  (
 	   .clk(clk),
 	   .reset_n(reset_n),
-	   .clk_enable(1'b1),
-	   .In1(effect_chorus_in[15:0]),
-	   .In2(6'd63),
-	   .Out1(effect_chorus_out[15:0])
+	   .audio_in(effect_chorus_in[15:0]),
+	   .sin_mod(9'd10),
+	   .audio_out(effect_chorus_out[15:0])
 	   );
 
 	chorus chorus_inst_r
 	  (
 	   .clk(clk),
 	   .reset_n(reset_n),
-	   .clk_enable(1'b1),
-	   .In1(effect_chorus_in[31:16]),
-	   .In2(6'd63),
-	   .Out1(effect_chorus_out[31:16])
+	   .audio_in(effect_chorus_in[31:16]),
+	   .sin_mod(9'd10),
+	   .audio_out(effect_chorus_out[31:16])
 	   );
 
 	assign effect_out = effect_chorus_out;
 
- -----/\----- EXCLUDED -----/\----- */
-/* -----\/----- EXCLUDED -----\/-----
+
 	reg [15:0] Drive = 16'd50;
 	reg [31:0]	effect_dist_in;
 	wire [31:0]	effect_dist_out;
@@ -251,7 +243,27 @@ module audio_lookback
 	  (.In1(effect_dist_in[31:16]),
 	   .Drive(Drive),
 	   .Out1(effect_dist_out[31:16]));
- -----/\----- EXCLUDED -----/\----- */
+
+	assign effect_out = effect_dist_out;
+
+
+
+	always @* begin
+		if (echo)
+		  effect_out = effect_echo_out;
+		else if (chorus)
+		  effect_out = effect_chorus_out;
+		else if (flanger)
+		  effect_out = effect_flanger_out;
+		else if (reverb)
+		  effect_out = effect_reverb_out;
+		else if (distortion)
+		  effect_out = effect_dist_out;
+		else if (loopback)
+		  effect_out = audio_lookback;
+		else
+		  effect_out = audio_loopback;
+	end // always @ *
 
 	always @(posedge clk or negedge reset_n) begin
 		if(~reset_n)
@@ -264,7 +276,6 @@ module audio_lookback
 			dacfifo_write <= 1'd0;
 		end
 	end
-
 
 
 	i2s_rx 

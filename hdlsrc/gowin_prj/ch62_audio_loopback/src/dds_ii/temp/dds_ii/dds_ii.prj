@@ -9,7 +9,7 @@
     </FileList>
     <OptionList>
         <Option type="disable_insert_pad" value="1"/>
-        <Option type="enable_dsrm" value="0"/>
+        <Option type="enable_dsrm" value="1"/>
         <Option type="include_path" value="/home/fermata/Development/Software/Gowin_V1.9.10.02_linux/IDE/ipcore/DDS_II/data"/>
         <Option type="include_path" value="/home/fermata/Development/FPGA/patatodsp/hdlsrc/gowin_prj/ch62_audio_loopback/src/dds_ii/temp/dds_ii"/>
         <Option type="output_file" value="dds_ii.vg"/>

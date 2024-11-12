@@ -191,7 +191,9 @@ module reverb_fdn_m
     reg signed [31:0] mix_d;
     wire signed [31:0] mix_o;
 
-    assign mix = $signed(audio_delay_0 / 2 + audio_delay_1 + audio_delay_4 + audio_delay_2 + audio_delay_3);
+    assign mix = $signed(audio_delay_0 / 2
+                         + (audio_delay_1 + audio_delay_4
+                            + audio_delay_2 + audio_delay_3) / 4);
 
     always @(posedge clk or negedge rst_n) begin
         if (~rst_n) begin

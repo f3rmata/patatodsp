@@ -5,7 +5,7 @@
 //Part Number: GW5A-LV25UG324C2/I1
 //Device: GW5A-25
 //Device Version: A
-//Created Time: Sat Nov  9 21:08:38 2024
+//Created Time: Tue Nov 12 12:25:18 2024
 
 //Change the instance name and port connections to the signal names
 //--------Copy here to design--------
@@ -14,8 +14,8 @@
 		.clk_i(clk_i), //input clk_i
 		.rst_n_i(rst_n_i), //input rst_n_i
 		.phase_valid_i(phase_valid_i), //input phase_valid_i
-		.phase_i(phase_i), //input [5:0] phase_i
-		.sine_o(sine_o), //output [5:0] sine_o
+		.phase_i(phase_i), //input [8:0] phase_i
+		.sine_o(sine_o), //output [8:0] sine_o
 		.data_valid_o(data_valid_o) //output data_valid_o
 	);
 

@@ -32,20 +32,32 @@ module distortion
    Out1);
 
 
-    input wire  [15:0] In1;  // uint16
-    input wire  [15:0] Drive;  // uint16
-    output wire [15:0] Out1;  // uint16
+    input wire signed [15:0] In1;  // int16
+    input wire signed [15:0] Drive;  // int16
+    output wire signed [15:0] Out1;  // int16
 
-    reg [15:0]         cut_wave = 0;
+    reg signed [31:0]         boost_wave = 0;
+    reg signed [31:0]         cut_wave = 0;
+    reg signed [31:0]         gain_wave = 0;
 
     always @(*) begin
-        if (In1 >= 16'd65534 - Drive)
-          cut_wave = 16'd65534 - Drive;
-        else if (In1 < 16'd65534 - Drive && In1 > 16'd65534 - 2*Drive)
-          cut_wave = 16'd65534 - 2*Drive;
-        else cut_wave = In1;
+        boost_wave = In1 * 384 >>> 4;
+        if (boost_wave >= 16'd65534 - Drive)
+          begin
+              cut_wave = 16'd65534 - Drive;
+              gain_wave = cut_wave;
+          end
+        else if (boost_wave <= -65534 + Drive)
+            begin
+                cut_wave = -65534 + Drive;
+                gain_wave = cut_wave;
+            end
+        else begin
+            cut_wave = boost_wave;
+            gain_wave = cut_wave;
+        end
     end
     // assign Out1 = volumn_ctrl_out1;
-    assign Out1 = cut_wave;
+    assign Out1 = gain_wave;
 
 endmodule  // distortion

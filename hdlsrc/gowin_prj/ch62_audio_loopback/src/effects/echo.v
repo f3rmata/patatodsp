@@ -3,7 +3,7 @@ module echo_effect_small_delay (
     input                clk,
     input                reset_n,
     input                clk_enable,
-    input [9:0]          delay,
+    input [8:0]          delay,
     input signed [15:0]  audio_in, // 16-bit signed audio input
     output signed [15:0] audio_out // 16-bit signed audio output
 );

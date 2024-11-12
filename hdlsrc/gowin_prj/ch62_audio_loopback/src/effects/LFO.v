@@ -5,12 +5,12 @@ module LFO
    input wire [29:0]  period,
 
    output wire       out_valid,
-   output wire [5:0] sin_out
+   output wire [8:0] sin_out
 );
 
     reg [29:0] clk_cnt = 0;
 
-    reg [5:0]  phase = 0;
+    reg [8:0]  phase = 0;
     reg        phase_valid = 0;
 
     always @(posedge clk or negedge rst_n) begin
@@ -22,7 +22,7 @@ module LFO
             if (clk_cnt >= period) begin
                 clk_cnt <= 0;
                 phase_valid <= 1'b1;
-                if (phase >= 6'd1023) begin
+                if (phase >= 9'd511) begin
                     phase <= 0;
                     phase_valid <= 0;
                 end else phase <= phase + 1'b1;
@@ -30,8 +30,8 @@ module LFO
         end
     end
 
-    wire [5:0] sin_dds;
-    assign sin_out = 6'd32 - sin_dds;
+    wire [8:0] sin_dds;
+    assign sin_out = 9'd32 - sin_dds;
 
     DDS_II_Top LFO_DDS
       (
